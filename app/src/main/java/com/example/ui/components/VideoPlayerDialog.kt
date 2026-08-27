@@ -136,8 +136,12 @@ fun VideoPlayerDialog(
                     AndroidView(
                         factory = { ctx ->
                             VideoView(ctx).apply {
-                                val file = File(item.localFilePath)
-                                val videoUri = if (file.exists()) Uri.fromFile(file) else Uri.parse(item.downloadUrl)
+                                val videoUri = when {
+                                    item.localFilePath.startsWith("content://") -> Uri.parse(item.localFilePath)
+                                    item.localFilePath.isNotBlank() && File(item.localFilePath).exists() -> Uri.fromFile(File(item.localFilePath))
+                                    item.downloadUrl.isNotBlank() -> Uri.parse(item.downloadUrl)
+                                    else -> Uri.parse("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+                                }
                                 setVideoURI(videoUri)
 
                                 val mediaController = MediaController(ctx)

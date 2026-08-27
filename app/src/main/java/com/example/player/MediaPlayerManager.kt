@@ -46,8 +46,12 @@ class MediaPlayerManager(
         _currentPlayingItem.value = item
 
         try {
-            val file = File(item.localFilePath)
-            val uri = if (file.exists()) Uri.fromFile(file) else Uri.parse(item.downloadUrl)
+            val uri = when {
+                item.localFilePath.startsWith("content://") -> Uri.parse(item.localFilePath)
+                item.localFilePath.isNotBlank() && File(item.localFilePath).exists() -> Uri.fromFile(File(item.localFilePath))
+                item.downloadUrl.isNotBlank() -> Uri.parse(item.downloadUrl)
+                else -> Uri.parse("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
+            }
 
             mediaPlayer = MediaPlayer().apply {
                 setDataSource(context, uri)
