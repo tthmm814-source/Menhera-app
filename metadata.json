@@ -1,0 +1,6 @@
+{
+  "name": "OmniGrab - All Video & Music Downloader",
+  "description": "تطبيق متطور وسلس لتحميل الفيديوهات والموسيقى من جميع المنصات بمختلف الصيغ (MP4, MP3, HD) مع التنزيل في الخلفية ومكتبة وسائط منظمة وعرض سرعة التحميل لحظة بلحظة.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
