@@ -30,7 +30,7 @@ jobs:
 
       - name: Build Debug APK with Gradle
         run: |
-          gradle assembleDebug --no-daemon --stacktrace
+          gradle assembleDebug --no-daemon --no-configuration-cache --stacktrace
 
       - name: Prepare APK for Release
         run: |
